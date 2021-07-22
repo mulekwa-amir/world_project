@@ -1,0 +1,40 @@
+body {
+    width: 80%;
+    margin: 0 auto;
+}
+.sea_rch {
+    width: 70%;
+}
+form {
+    width: 70%;
+    margin: 0 auto;
+}
+/* .country-table  {
+    margin-top: 10px;
+    width: 70%;
+    margin: 0 auto;
+} */
+.country-table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    padding-top: 12px;
+    width: 70%;
+    margin: 0 auto;
+  }
+  
+  .country-table td, #customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .country-table tr:nth-child(even){background-color: #f2f2f2;}
+  
+  .country-table tr:hover {background-color: #ddd;}
+  
+  .country-table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+  }
