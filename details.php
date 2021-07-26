@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Bootstrap CSS -->
-    <link href="./assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="./assets/style.css" rel="stylesheet" type="text/css" >
-
-    <title>Word statsistics</title>
-  </head>
-  <body>
-
+  <html lang="en">
+    <head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+      <!-- Bootstrap CSS -->
+      <link href="./assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+      <link href="./assets/style.css" rel="stylesheet" type="text/css" >
+  
+      <title>Word statsistics</title>
+    </head>
+    <body>
+  
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">WORLD STATSITICS</a>
@@ -44,21 +44,23 @@
         </div>
     </div>
     </nav>
-    <section>
-    <div><h1>Simple Atlas statistics</h1></div>
-    <div>
-      <ul>
-        <li><a href="region.php">Regions</a></li>
-        <li><a href="subregion.php">Subregions</a></li>
-        <li><a href="table.php">Countries</a></li>
-      </ul>
-    </div>
+    <section class="details">
+        <h2>Country's Details</h2>
+        <table class="table" >
+            <tr>
+                <th>Country</th><td>...</td>
+            </tr>
+            <tr>
+                <th>Capital</th><td>...</td>
+            </tr>
+            <tr>
+                <th>Population</th><td>...</td>
+            </tr>
+            <tr>
+                <th>Area</th><td>...</td>
+            </tr>
+            <tr>
+                <th>Languages</th><td>...</td>
+            </tr>
+        </table>
     </section>
-
-
-
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="./assets/bootstrap/js/bootstrap.bundle.min.js" ></script>
-
-  </body>
-</html>

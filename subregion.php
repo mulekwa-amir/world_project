@@ -3,16 +3,16 @@ try {
     //code...
     include "./includes/db_connection.php";
 
-    $sql = "SELECT* FROM country";
+    $sql = "SELECT* FROM subregion";
     $result = $db->query($sql);
-    $count = $db->query("SELECT count(*) FROM country");
+    //$count = $db->query("SELECT count(*) FROM country");
     $numrows = $result->num_rows;
     if (!$result) {
         # code...
         echo "database query failed" . mysqli_connect_error();
     }
-    // $search = $_GET['search'];
-    // $query = "SELECT FROM country WHERE country_name LIKE '%$search%" ;
+    //$search = $_GET['search'];
+   // $query = "SELECT FROM country WHERE country_name LIKE '%$search%" ;
     //$stmt = $db->prepare($query);
     // while ($row = mysqli_fetch_assoc(mysqli_query($db,$query))) {
     //     echo "<div id='link' onClick='addText(\"".$row['country_name']."\");'>" . $row['country_name'] . "</div>";  
@@ -51,7 +51,7 @@ try {
         <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto nav mb-2 mb-lg-0">
+        <ul class="navbar-nav nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="index.php">Home</a>
             </li>
@@ -81,7 +81,6 @@ try {
     </form>
     <div class="numrows">
         <?php 
-
         // if (isset($_GET['submit'])) {
             
         // $row = $stmt->fetch();
@@ -90,40 +89,32 @@ try {
                 echo "There are no results found.";
             }else{
         ?>
-        <?php echo "The number of countries are: $numrows"; ?>
+        <?php echo "The number of Subregions are: $numrows"; ?>
     </div>
-    <div class="table-responsive country-table">
-        <table class="table">
-            <thead>
-            <tr>
-                <th>No.</th>
-                <th>COUNTRY CODE</th>
-                <th>COUNTRY NAME</th>
-                <th>CAPITAL</th>
-            </tr>
-            </thead>
-                <?php
-                    while ($item = $result->fetch_object()) { ?>
-            <tbody>        
-                    <tr onclick="Redirect()">
-                        <td><?php echo $item->id; ?>  </td>
-                        <td><?php echo $item->alphacode2; ?></td>
-                        <td><?php echo $item->country_name; ?> </td>
-                        <td><?php echo $item->capital;  ?></td>
-                    </tr>
-            </tbody>        
-                <?php } 
-                    mysqli_free_result($result);
-                ?>
-        </table>
-    </div> 
-            <?php }?>
-            
-       <?php  //} ?>        
+        <div class="table-responsive country-table">
+            <table class="table">
+                <tr>
+                    <th>No.</th>
+                    <th>SUB-REGION</th>
+                </tr>
+                
+                    <?php
+                        while ($item = $result->fetch_object()) { ?>
+                        <tr>
+                            <td><?php echo $item->id; ?>  </td>
+                            <td><?php echo $item->sub_name; ?> </td>
+                        </tr>
+                    <?php } 
+                        mysqli_free_result($result);
+                    ?>
+            </table>
+        </div> 
+
+        <?php }?>  
+        <?php  //} ?>        
 
         <!-- Option 1: Bootstrap Bundle with Popper -->
         <script src="./assets/bootstrap/js/bootstrap.bundle.min.js" ></script>
-        <script src="./javascript/index.js"></script>
   
     </body>
 </html>

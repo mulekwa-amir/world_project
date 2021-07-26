@@ -6,8 +6,8 @@ $password = "";
 $database_name = "world_project";
 
 
-$db = mysqli_connect($servername, $username, $password, $database_name);
-if (!$db) {
+$db = new mysqli($servername, $username, $password, $database_name);
+if ($db->connect_errno) {
     echo "Failed to connect to MySQL: " . mysqli_connect_error();
     exit();
   }

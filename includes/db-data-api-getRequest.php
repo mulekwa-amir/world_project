@@ -26,10 +26,21 @@ if ($e = curl_error($ch)) {
             $languages = $country->languages;
             foreach ($languages as $language) {
                 # code...
+                $languages = $language->name;              
+                // echo"<ul>";
+                // echo " <li> Languages:".$language->name . "</li>";
+                // echo"</ul>";
+            }
+        }
+
+        if (is_array($country->currencies)) {
+            # code...
+            $currencies = $country->currencies;
+            foreach ($currencies as $item) {
+                # code...
+                $currency = $item->name; 
+                $symbol = $item->symbol;             
                 
-                echo"<ul>";
-                echo " <li> Languages:".$language->name . "</li>";
-                echo"</ul>";
             }
         }
         
@@ -43,74 +54,76 @@ if ($e = curl_error($ch)) {
         // echo '8.Area: ' . $country->area . '</br> </br>';
         //echo 'Languages: ' . $country->languages[1] . '</br>';
         $countryCode = $country->alpha2Code;
-        $name = $country->name;
+        $name = mysqli_real_escape_string($db, $country->name);
         $city = $country->capital;
         $region = $country->region;
         $callingCode = $country->callingCodes[0];
         $population = $country->population;
         $subregion = $country->subregion;
-        $area = $country->area;
+        $area = $country->area > 0 ? $country->area : 0;
+        $native = mysqli_real_escape_string($db, $country->nativeName);
 
-        
-    }
-    //*************** */
+        //*************** */
     // insert data ito the database..
     //**************** */
 
-    //continet table
-    $sql_c = "INSERT continet (region_name) VALUES (?)";
+    //  // subregion table
+    //  $result = $db->query("SELECT * FROM subregion WHERE sub_name='".$subregion."'");
 
-    if($stmt != $db->prepare($sql_c)){
-        //error
-        echo "ERROR: Could not prepare query: $sql. ";
-    }else{ //success
-        $stmt->bind_param("s",$region);
-        mysqli_stmt_execute($stmt);
-    }
-    
+    //  if($result->num_rows == 0){ 
+ 
+    //      $insert_result = $db->query("INSERT subregion (sub_name) VALUES ('$subregion')");
+    //      if($insert_result){
+    //          echo $subregion." Has been Inserted successfully.";
+    //      }
+    //  }
+
+    // //continet table
+    // $result = $db->query("SELECT * FROM region WHERE region_name='".$region."'");
+
+    // if($result->num_rows == 0){ 
+
+    //     $insert_result = $db->query("INSERT region (region_name) VALUES ('$region')");
+    //     if($insert_result){
+    //         echo $region." Has been Inserted successfully.";
+    //     }
+    // }
+ 
     //country table
-    $sql_ctry = "INSERT country (country_name, alphacode2, population_density, capital, Calling-code, native_name, area)
-             VALUES (?, ?, ?, ?, ?, ?)";
+    $sql_ctry = "INSERT country (country_name, alphacode2, population_density, capital, Calling_code, native_name, area)
+                 VALUES ('$name', '$countryCode', $population , '$city', $callingCode, '$native', $area)";
 
-    if($stmt != $db->prepare($sql_ctry)){
+    if($db->query($sql_ctry)){
         //error
-        echo "ERROR: Could not prepare query: $sql. ";
+        echo "success.";
+        
     }else{
-        $stmt->bind_param("ssssisi",$name, $countryCode, $population , $city, $callingCode, $native, $area );
-        mysqli_stmt_execute($stmt);
+        echo "ERROR: Could not able to execute $sql_ctry. " . mysqli_error($db);
     }
     
 
-    //subregion table
-    $sql_sub = "INSERT sub-region (country_name)VALUES (?)";
-
-    if($stmt != $db->prepare($sql_sub)){
-        //error
-        echo "ERROR: Could not prepare query: $sql. ";
-    }else{ //success
-        $stmt->bind_param("s",$subregion);
-        mysqli_stmt_execute($stmt);
-    }
-    
-
-    //languages table
+    // //languages table
     // $sql_lang = "INSERT languages (lang_name)VALUES (?)";
 
     // $stmt = $db->prepare($sql_lang);
     // $stmt->bind_param("s",$language, );
-    // mysqli_stmt_execute($stmt);
+    // $stmt->execute();
 
     // //currency table
     // $sql_cc = "INSERT country (currency_name, symbol) VALUES (?, ?)";
 
     // $stmt = $db->prepare($sql_cc);
     // $stmt->bind_param("ss",$currency_ame, $symbol );
-    // mysqli_stmt_execute($stmt);
+    // $stmt->execute();
     
 
     //******* */
     //curl close
     curl_close($ch);
+
+        
+    }
+    
 }
 
 ?>
